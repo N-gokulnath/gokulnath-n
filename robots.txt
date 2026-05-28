@@ -1,0 +1,36 @@
+# robots.txt for Gokulnath N Portfolio
+# Optimized for both Traditional Search Engines and AI Search Engines (GEO)
+
+User-agent: *
+Allow: /
+
+# Specifically allow major AI crawlers for Generative Engine search indexation (ChatGPT, Claude, Perplexity, Copilot)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Sitemap link
+Sitemap: https://n-gokulnath.github.io/sitemap.xml
