@@ -269,27 +269,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ----- Hiding Spline Watermark Logo ----- */
-  const splineViewer = document.querySelector('spline-viewer');
-  if (splineViewer) {
-    // Wait for the Spline viewer to load its shadow DOM
-    splineViewer.addEventListener('load', () => {
-      const shadowRoot = splineViewer.shadowRoot;
-      if (shadowRoot) {
-        // Try multiple selectors to guarantee we find and remove the watermark anchor/logo
-        const watermark = shadowRoot.getElementById('logo') || 
-                          shadowRoot.querySelector('#logo') || 
-                          shadowRoot.querySelector('a[href*="spline.design"]') || 
-                          shadowRoot.querySelector('.logo');
-        if (watermark) {
-          watermark.style.display = 'none';
-          watermark.style.opacity = '0';
-          watermark.style.visibility = 'hidden';
-          watermark.style.pointerEvents = 'none';
-        }
+  /* ----- Deferred Asynchronous Loading of Spline 3D Viewer ----- */
+  window.addEventListener('load', () => {
+    // Wait 1200ms to guarantee all initial page animations and assets are settled and idle
+    setTimeout(() => {
+      const splineContainer = document.querySelector('.hero-spline-bg');
+      if (splineContainer) {
+        const viewer = document.createElement('spline-viewer');
+        viewer.setAttribute('url', 'https://prod.spline.design/Dn9dBOFpxomJ9LFV/scene.splinecode');
+        viewer.setAttribute('loading-anim-type', 'spinner-small-dark');
+        
+        // Watermark Removal Logic once Spline's internal shadow DOM has loaded
+        viewer.addEventListener('load', () => {
+          const shadowRoot = viewer.shadowRoot;
+          if (shadowRoot) {
+            const watermark = shadowRoot.getElementById('logo') || 
+                              shadowRoot.querySelector('#logo') || 
+                              shadowRoot.querySelector('a[href*="spline.design"]') || 
+                              shadowRoot.querySelector('.logo');
+            if (watermark) {
+              watermark.style.display = 'none';
+              watermark.style.opacity = '0';
+              watermark.style.visibility = 'hidden';
+              watermark.style.pointerEvents = 'none';
+            }
+          }
+        });
+
+        splineContainer.appendChild(viewer);
       }
-    });
-  }
+    }, 1200);
+  }, { passive: true });
 
   /* ----- Optimize Spline 3D Render Loop (GPU Performance) ----- */
   const heroSection = document.getElementById('hero');
