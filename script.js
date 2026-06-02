@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     handleNavbarScroll();
     updateActiveLink();
-  });
+  }, { passive: true });
 
   handleNavbarScroll();
   updateActiveLink();
@@ -289,6 +289,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+  }
+
+  /* ----- Optimize Spline 3D Render Loop (GPU Performance) ----- */
+  const heroSection = document.getElementById('hero');
+  const splineBg = document.querySelector('.hero-spline-bg');
+  if (heroSection && splineBg) {
+    const splineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          splineBg.style.display = 'block'; // Resume rendering
+        } else {
+          splineBg.style.display = 'none';  // Suspend WebGL rendering loops
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.02 // Trigger when even 2% of the hero is visible
+    });
+    splineObserver.observe(heroSection);
   }
 
 });
