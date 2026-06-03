@@ -308,75 +308,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ----- Lazy Lifecycle Loading & WebGL Context Release of Spline ----- */
-  let splineViewer = null;
-  let splineScriptInjected = false;
+  /* ----- Deferred Asynchronous Loading of Spline 3D Viewer ----- */
+  window.addEventListener('load', () => {
+    // Wait 1200ms to guarantee all initial page animations and assets are settled and idle
+    setTimeout(() => {
+      const splineContainer = document.querySelector('.hero-spline-bg');
+      if (splineContainer) {
+        // Dynamically inject the Spline script module to keep initial page parse unblocked
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
+        document.body.appendChild(script);
 
-  function injectSplineScript() {
-    if (splineScriptInjected) return;
-    splineScriptInjected = true;
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
-    document.body.appendChild(script);
-  }
-
-  function loadSpline() {
-    // Only initialize WebGL viewer on desktop devices
-    if (window.innerWidth < 768) return;
-    
-    const splineContainer = document.querySelector('.hero-spline-bg');
-    if (splineContainer && !splineViewer) {
-      injectSplineScript();
-      
-      splineViewer = document.createElement('spline-viewer');
-      splineViewer.setAttribute('url', 'https://prod.spline.design/Dn9dBOFpxomJ9LFV/scene.splinecode');
-      splineViewer.setAttribute('loading-anim-type', 'spinner-small-dark');
-      
-      // Watermark Removal Logic once Spline's internal shadow DOM has loaded
-      splineViewer.addEventListener('load', () => {
-        const shadowRoot = splineViewer.shadowRoot;
-        if (shadowRoot) {
-          const watermark = shadowRoot.getElementById('logo') || 
-                            shadowRoot.querySelector('#logo') || 
-                            shadowRoot.querySelector('a[href*="spline.design"]') || 
-                            shadowRoot.querySelector('.logo');
-          if (watermark) {
-            watermark.style.display = 'none';
-            watermark.style.opacity = '0';
-            watermark.style.visibility = 'hidden';
-            watermark.style.pointerEvents = 'none';
+        const viewer = document.createElement('spline-viewer');
+        viewer.setAttribute('url', 'https://prod.spline.design/Dn9dBOFpxomJ9LFV/scene.splinecode');
+        viewer.setAttribute('loading-anim-type', 'spinner-small-dark');
+        
+        // Watermark Removal Logic once Spline's internal shadow DOM has loaded
+        viewer.addEventListener('load', () => {
+          const shadowRoot = viewer.shadowRoot;
+          if (shadowRoot) {
+            const watermark = shadowRoot.getElementById('logo') || 
+                              shadowRoot.querySelector('#logo') || 
+                              shadowRoot.querySelector('a[href*="spline.design"]') || 
+                              shadowRoot.querySelector('.logo');
+            if (watermark) {
+              watermark.style.display = 'none';
+              watermark.style.opacity = '0';
+              watermark.style.visibility = 'hidden';
+              watermark.style.pointerEvents = 'none';
+            }
           }
-        }
-      });
+        });
 
-      splineContainer.appendChild(splineViewer);
-    }
-  }
+        splineContainer.appendChild(viewer);
+      }
+    }, 1200);
+  }, { passive: true });
 
-  function unloadSpline() {
-    const splineContainer = document.querySelector('.hero-spline-bg');
-    if (splineContainer && splineViewer) {
-      splineViewer.remove();
-      splineViewer = null;
-    }
-  }
-
+  /* ----- Optimize Spline 3D Render Loop (GPU Performance) ----- */
   const heroSection = document.getElementById('hero');
   const splineBg = document.querySelector('.hero-spline-bg');
   if (heroSection && splineBg) {
     const splineObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Deferred load on intersection to ensure main layout paints first
-          setTimeout(loadSpline, 300);
+          splineBg.style.display = 'block'; // Resume rendering
         } else {
-          unloadSpline();
+          splineBg.style.display = 'none';  // Suspend WebGL rendering loops
         }
       });
     }, {
       root: null,
-      threshold: 0.01 // Load when any part of the Hero is visible, unload when fully offscreen
+      threshold: 0.02 // Trigger when even 2% of the hero is visible
     });
     splineObserver.observe(heroSection);
   }
