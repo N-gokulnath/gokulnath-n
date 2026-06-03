@@ -9,6 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('section[id]');
 
+  let sectionPositions = [];
+
+  function cacheSectionPositions() {
+    sectionPositions = [];
+    sections.forEach(section => {
+      sectionPositions.push({
+        id: section.getAttribute('id'),
+        top: section.offsetTop,
+        height: section.offsetHeight
+      });
+    });
+  }
+
+  // Cache positions initially
+  cacheSectionPositions();
+
+  // Re-cache section positions on window resize/layout changes
+  window.addEventListener('resize', cacheSectionPositions, { passive: true });
+  window.addEventListener('load', cacheSectionPositions, { passive: true });
+
   function handleNavbarScroll() {
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
@@ -21,15 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateActiveLink() {
     const scrollPos = window.scrollY + 120;
 
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute('id');
-
-      if (scrollPos >= top && scrollPos < top + height) {
+    sectionPositions.forEach(sec => {
+      if (scrollPos >= sec.top && scrollPos < sec.top + sec.height) {
         navLinks.forEach(link => {
           link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
+          if (link.getAttribute('href') === `#${sec.id}`) {
             link.classList.add('active');
           }
         });
@@ -37,9 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Throttled scroll listener using requestAnimationFrame ticking
+  let isScrolling = false;
   window.addEventListener('scroll', () => {
-    handleNavbarScroll();
-    updateActiveLink();
+    if (!isScrolling) {
+      window.requestAnimationFrame(() => {
+        handleNavbarScroll();
+        updateActiveLink();
+        isScrolling = false;
+      });
+      isScrolling = true;
+    }
   }, { passive: true });
 
   handleNavbarScroll();
@@ -96,15 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        const el = entry.target;
+        el.classList.add('visible');
+        
+        // Remove will-change layer promotions after transition finishes to reclaim GPU memory
+        el.addEventListener('transitionend', function handleTransitionEnd() {
+          el.style.willChange = 'auto';
+          el.removeEventListener('transitionend', handleTransitionEnd);
+        });
+        
+        observer.unobserve(el);
       }
     });
   }, observerOptions);
 
-  animateElements.forEach((el, index) => {
-    // Stagger animation delay
-    el.style.transitionDelay = `${index % 4 * 0.1}s`;
+  animateElements.forEach((el) => {
+    // Stagger animation delay locally relative to siblings in the same section container
+    const siblings = Array.from(el.parentNode.querySelectorAll('.animate-in'));
+    const index = siblings.indexOf(el);
+    el.style.transitionDelay = `${index * 0.1}s`;
     observer.observe(el);
   });
 
@@ -159,19 +193,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const target = parseInt(match[1]);
     const suffix = text.replace(/\d+/, '');
-    let current = 0;
-    const increment = Math.ceil(target / 40);
-    const duration = 1500;
-    const stepTime = duration / (target / increment);
+    const duration = 1500; // 1.5 seconds counter duration
+    let startTime = null;
 
-    const counter = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(counter);
-      }
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const current = Math.floor(progress * target);
       element.textContent = current + suffix;
-    }, stepTime);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        element.textContent = target + suffix;
+        // Re-cache positions since layout might shift slightly after count completes
+        cacheSectionPositions();
+      }
+    }
+
+    window.requestAnimationFrame(step);
   }
 
   const statObserver = new IntersectionObserver((entries) => {
@@ -269,53 +308,75 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ----- Deferred Asynchronous Loading of Spline 3D Viewer ----- */
-  window.addEventListener('load', () => {
-    // Wait 1200ms to guarantee all initial page animations and assets are settled and idle
-    setTimeout(() => {
-      const splineContainer = document.querySelector('.hero-spline-bg');
-      if (splineContainer) {
-        const viewer = document.createElement('spline-viewer');
-        viewer.setAttribute('url', 'https://prod.spline.design/Dn9dBOFpxomJ9LFV/scene.splinecode');
-        viewer.setAttribute('loading-anim-type', 'spinner-small-dark');
-        
-        // Watermark Removal Logic once Spline's internal shadow DOM has loaded
-        viewer.addEventListener('load', () => {
-          const shadowRoot = viewer.shadowRoot;
-          if (shadowRoot) {
-            const watermark = shadowRoot.getElementById('logo') || 
-                              shadowRoot.querySelector('#logo') || 
-                              shadowRoot.querySelector('a[href*="spline.design"]') || 
-                              shadowRoot.querySelector('.logo');
-            if (watermark) {
-              watermark.style.display = 'none';
-              watermark.style.opacity = '0';
-              watermark.style.visibility = 'hidden';
-              watermark.style.pointerEvents = 'none';
-            }
+  /* ----- Lazy Lifecycle Loading & WebGL Context Release of Spline ----- */
+  let splineViewer = null;
+  let splineScriptInjected = false;
+
+  function injectSplineScript() {
+    if (splineScriptInjected) return;
+    splineScriptInjected = true;
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js';
+    document.body.appendChild(script);
+  }
+
+  function loadSpline() {
+    // Only initialize WebGL viewer on desktop devices
+    if (window.innerWidth < 768) return;
+    
+    const splineContainer = document.querySelector('.hero-spline-bg');
+    if (splineContainer && !splineViewer) {
+      injectSplineScript();
+      
+      splineViewer = document.createElement('spline-viewer');
+      splineViewer.setAttribute('url', 'https://prod.spline.design/Dn9dBOFpxomJ9LFV/scene.splinecode');
+      splineViewer.setAttribute('loading-anim-type', 'spinner-small-dark');
+      
+      // Watermark Removal Logic once Spline's internal shadow DOM has loaded
+      splineViewer.addEventListener('load', () => {
+        const shadowRoot = splineViewer.shadowRoot;
+        if (shadowRoot) {
+          const watermark = shadowRoot.getElementById('logo') || 
+                            shadowRoot.querySelector('#logo') || 
+                            shadowRoot.querySelector('a[href*="spline.design"]') || 
+                            shadowRoot.querySelector('.logo');
+          if (watermark) {
+            watermark.style.display = 'none';
+            watermark.style.opacity = '0';
+            watermark.style.visibility = 'hidden';
+            watermark.style.pointerEvents = 'none';
           }
-        });
+        }
+      });
 
-        splineContainer.appendChild(viewer);
-      }
-    }, 1200);
-  }, { passive: true });
+      splineContainer.appendChild(splineViewer);
+    }
+  }
 
-  /* ----- Optimize Spline 3D Render Loop (GPU Performance) ----- */
+  function unloadSpline() {
+    const splineContainer = document.querySelector('.hero-spline-bg');
+    if (splineContainer && splineViewer) {
+      splineViewer.remove();
+      splineViewer = null;
+    }
+  }
+
   const heroSection = document.getElementById('hero');
   const splineBg = document.querySelector('.hero-spline-bg');
   if (heroSection && splineBg) {
     const splineObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          splineBg.style.display = 'block'; // Resume rendering
+          // Deferred load on intersection to ensure main layout paints first
+          setTimeout(loadSpline, 300);
         } else {
-          splineBg.style.display = 'none';  // Suspend WebGL rendering loops
+          unloadSpline();
         }
       });
     }, {
       root: null,
-      threshold: 0.02 // Trigger when even 2% of the hero is visible
+      threshold: 0.01 // Load when any part of the Hero is visible, unload when fully offscreen
     });
     splineObserver.observe(heroSection);
   }
