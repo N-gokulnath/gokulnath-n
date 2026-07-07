@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gokulnath N - Full Stack Developer</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css?v=2">
+  
+  <link rel="stylesheet" href="tailwind-output.css?v=1">
+</head>
+<body class="min-h-full flex flex-col font-sans antialiased selection:bg-accent selection:text-accent-foreground">
+
+  <!-- Enable Button -->
+  <div id="enable-btn-container" class="z-[999] pointer-events-auto" style="position: fixed; bottom: 24px; right: 24px; transition: all 0.3s ease;">
+    <button onclick="enablePremiumExperience()" id="enable-experience-btn" class="cursor-pointer group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-neutral-50 px-6 font-medium text-neutral-950 duration-300 hover:w-full hover:scale-105 active:scale-95 shadow-lg border border-neutral-200">
+      <div class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+        <div class="relative h-full w-8 bg-black/20"></div>
+      </div>
+      <span class="flex items-center gap-2 relative z-10">
+        Enable Experience
+      </span>
+    </button>
+  </div>
+
+  <script>
+    function enablePremiumExperience() {
+      // Hide button and raw view
+      document.getElementById('enable-btn-container').style.display = 'none';
+      document.getElementById('raw-html-view').style.display = 'none';
+      
+      // Show premium view
+      const premiumView = document.getElementById('premium-view');
+      premiumView.classList.remove('hidden');
+      
+      // Trigger reflow and fade in
+      void premiumView.offsetWidth;
+      premiumView.classList.remove('opacity-0');
+      premiumView.classList.add('opacity-100');
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  </script>
+
+  <!-- Raw HTML View -->
+  <div id="raw-html-view" class="p-8 max-w-4xl mx-auto raw-html font-sans leading-relaxed text-neutral-300">
+    <header class="mb-10">
+      <h1 class="text-4xl font-bold text-white mb-2">Gokulnath N</h1>
+      <h2 class="text-2xl font-semibold mb-4 text-neutral-400">Full Stack Developer</h2>
+      <p class="text-sm">
+        +91 8778144018 | <a href="mailto:gokulnath272006@gmail.com" class="text-accent hover:underline">gokulnath272006@gmail.com</a> | 
+        <a href="https://linkedin.com/in/gokulnath-n" class="text-accent hover:underline">linkedin.com/in/gokulnath-n</a> | 
+        <a href="https://github.com/N-gokulnath" class="text-accent hover:underline">github.com/N-gokulnath</a> | 
+        Chennai, India
+      </p>
+    </header>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Professional Summary</h2>
+      <p>
+        Motivated Full Stack Developer and BCA graduate with a strong foundation in building web applications and <br> AI-driven automation. 
+        A fast learner and collaborative team player, eager to contribute to dynamic software development teams, master new technologies, and deliver innovative solutions.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Technical Skills</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong class="text-white">Languages:</strong> Python, JavaScript, HTML5, CSS3, SQL</li>
+        <li><strong class="text-white">Frontend & Databases:</strong> React.js, Tailwind CSS, Responsive Design, Firebase, Supabase, Google Cloud Platform (GCP)</li>
+        <li><strong class="text-white">Developer Tools:</strong> Git, GitHub, VS Code, Chrome DevTools, Linux</li>
+        <li><strong class="text-white">AI Productivity:</strong> Generative AI Tools, AntiGravity, GitHub Copilot, n8n, OpenRouter, Google AI Studio, Claude Code, Google Stitch, Cursor AI</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Education</h2>
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-white">Guru Nanak College</h3>
+        <p>Bachelor of Computer Applications (BCA) - July 2023 – April 2026, Chennai, India</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold text-white">Saradha Matric. Hr. Sec. School</h3>
+        <p>Higher Secondary Certificate (HSC) - March 2023, Gingee, India</p>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Projects</h2>
+      
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-white">CablePro</h3>
+        <p class="text-sm italic mb-2 text-neutral-400">React.js, Next.js 14, Tailwind CSS, Firebase Firestore | 2026</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Engineered a full-stack operator management platform featuring billing, payment tracking, and a real-time analytics dashboard powered by Firebase Firestore.</li>
+          <li>Crafted a mobile-friendly user interface with dark mode, smooth animations, and financial reports, enhancing operator workflow efficiency by 25%.</li>
+        </ul>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-white">RankFlow</h3>
+        <p class="text-sm italic mb-2 text-neutral-400">React, Gemini 3.5 API, Tailwind, Prisma ORM, PostgreSQL | 2026</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Architected a high-fidelity AI talent acquisition engine that automates resume screening by evaluating applicant profiles against target job descriptions.</li>
+          <li>Integrated the Google Gemini 3.5 AI model using structured JSON response schemas to generate quantitative overall match scores and skill-gap matrices.</li>
+          <li>Implemented database persistence using Prisma ORM with SQLite local fallbacks and production-grade PostgreSQL support, ensuring automatic schema synchronization.</li>
+        </ul>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-white">LinkedIn Post Automation</h3>
+        <p class="text-sm italic mb-2 text-neutral-400">n8n, AI APIs, Workflow Automation, LinkedIn API | 2025</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Designed an n8n workflow to generate topic ideas, create custom images, and auto-publish content to LinkedIn.</li>
+          <li>Streamlined social media operations with an automated pipeline, reducing manual content creation overhead by 90%.</li>
+        </ul>
+      </div>
+
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-white">HTMLforge</h3>
+        <p class="text-sm italic mb-2 text-neutral-400">HTML, Node.js, SQL, Docker, JavaScript | 2026</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Created a web-based utility platform to convert raw HTML code and URLs into high-quality PDF documents.</li>
+          <li>Optimized backend conversion processes to generate PDFs with sub-second response times.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Internships</h2>
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-white">ApexPlanet Software Pvt. Ltd.</h3>
+        <p class="text-sm italic mb-2 text-neutral-400">Web Development Intern (Virtual) | May 2025 – June 2025 | Certificate ID: APSPL252965</p>
+        <ul class="list-disc pl-5">
+          <li>Developed and implemented responsive web interfaces using HTML5, CSS3, and JavaScript, translating design mockups into interactive code.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Certifications</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Introduction to Cloud Computing (Feb. 2025)</li>
+        <li>Data Analyst Essentials – Cisco (Dec. 2024)</li>
+        <li>Fundamentals of Generative AI – Microsoft (July 2024)</li>
+        <li>Cybersecurity Essentials – Cisco (Nov. 2023)</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-white mb-3 border-b border-white/10 pb-2">Languages</h2>
+      <p>Tamil: Native Speaker | English: Advanced</p>
+    </section>
+  </div>
+
+  <!-- Premium Experience View -->
+  <div id="premium-view" class="hidden opacity-0 transition-opacity duration-1000">
+    <!-- Dynamic Background -->
+    <div class="fixed inset-0 w-screen h-screen -z-50 pointer-events-none bg-[#050505] overflow-hidden" id="bg-container">
+      <!-- Images will be injected here by script.js -->
+    </div>
+    
+    <!-- Blur Overlay for Scroll Effect -->
+    <div id="blur-overlay" class="fixed inset-0 -z-40 bg-black/40 backdrop-blur-[15px] pointer-events-none" style="opacity: 0;"></div>
+
+    <!-- Navigation -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6 bg-transparent border-b border-transparent">
+      <div class="max-w-6xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <a href="#" class="text-xl font-bold tracking-tight text-white transition-colors hover:text-accent">
+          GN
+        </a>
+        
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1 bg-black/20 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-sm">
+          <a href="#about" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all text-neutral-300 hover:text-white hover:bg-white/10">About</a>
+          <a href="#skills" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all text-neutral-300 hover:text-white hover:bg-white/10">Skills</a>
+          <a href="#projects" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all text-neutral-300 hover:text-white hover:bg-white/10">Projects</a>
+          <a href="#experience" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all text-neutral-300 hover:text-white hover:bg-white/10">Experience</a>
+          <a href="#certifications" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all text-neutral-300 hover:text-white hover:bg-white/10">Certifications</a>
+          <a href="#contact" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition-all text-neutral-300 hover:text-white hover:bg-white/10">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-neutral-300 hover:text-white">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/90 backdrop-blur-xl pt-24 px-6 md:hidden opacity-0 pointer-events-none transition-opacity duration-300">
+      <nav class="flex flex-col gap-6">
+        <a href="#about" class="mobile-nav-link text-2xl font-semibold tracking-tight transition-colors text-neutral-400 hover:text-white">About</a>
+        <a href="#skills" class="mobile-nav-link text-2xl font-semibold tracking-tight transition-colors text-neutral-400 hover:text-white">Skills</a>
+        <a href="#projects" class="mobile-nav-link text-2xl font-semibold tracking-tight transition-colors text-neutral-400 hover:text-white">Projects</a>
+        <a href="#experience" class="mobile-nav-link text-2xl font-semibold tracking-tight transition-colors text-neutral-400 hover:text-white">Experience</a>
+        <a href="#certifications" class="mobile-nav-link text-2xl font-semibold tracking-tight transition-colors text-neutral-400 hover:text-white">Certifications</a>
+        <a href="#contact" class="mobile-nav-link text-2xl font-semibold tracking-tight transition-colors text-neutral-400 hover:text-white">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Main Content Layer -->
+    <div class="relative z-10 w-full pb-20">
+      
+      <!-- Hero Section -->
+      <section id="hero" class="relative min-h-screen flex items-center pt-24 transition-colors duration-1000">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none -z-10"></div>
+        <div class="max-w-5xl mx-auto px-6 md:px-12 w-full relative">
+          <div class="space-y-6 animate-on-scroll translate-y-8 opacity-0 transition-all duration-700">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-[13px] font-medium text-white border border-white/10 shadow-sm">
+              <i class="fa-solid fa-location-dot text-accent"></i>
+              <span>Chennai, India</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
+              Gokulnath N
+            </h1>
+            
+            <h2 class="text-xl md:text-3xl font-medium text-neutral-200 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
+              Full Stack Developer
+            </h2>
+            
+            <p class="text-[15px] md:text-[17px] text-neutral-300 leading-relaxed font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+              Building highly interactive web applications and AI-driven automation. 
+              Eager to <br> master new technologies and deliver innovative software solutions.
+            </p>
+            <div class="flex flex-wrap gap-4 items-center">
+              <a href="#contact" class="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-accent px-6 text-[15px] font-medium text-white shadow-lg transition-all hover:bg-accent/90 hover:-translate-y-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Contact Me
+              </a>
+              <a href="Gokul_resume_1.pdf" target="_blank" rel="noreferrer" class="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-md px-6 text-[15px] font-medium text-white border border-white/20 shadow-lg transition-all hover:bg-white/20 hover:-translate-y-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Resume
+              </a>
+            </div>
+            <div class="flex items-center gap-6 mt-10">
+              <a href="https://github.com/N-gokulnath" target="_blank" rel="noreferrer" class="text-white hover:-translate-y-1 transition-all">
+                <i class="fa-brands fa-github text-[24px] drop-shadow-md"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/gokulnath-n-01b837319/" target="_blank" rel="noreferrer" class="text-white hover:-translate-y-1 transition-all">
+                <i class="fa-brands fa-linkedin text-[24px] drop-shadow-md"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Glass Container for Sections -->
+      <div class="max-w-5xl mx-auto px-4 md:px-8 mt-24">
+        <div class="bg-[#121212]/20 backdrop-blur-[6px] border border-white/5 shadow-2xl rounded-[32px] p-6 md:p-12 flex flex-col gap-20">
+          
+          <!-- About Section -->
+          <section id="about" class="scroll-mt-32 animate-on-scroll">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-6 flex items-center gap-2">
+              <span class="w-8 h-[1px] bg-accent"></span> About
+            </h3>
+            <p class="text-neutral-200 leading-relaxed text-[15px] md:text-base drop-shadow-sm font-medium">
+              Motivated Full Stack Developer and BCA graduate with a strong foundation in building web applications and AI-driven automation. I am a fast learner and collaborative team player, eager to contribute to dynamic software development teams, master new technologies, and deliver innovative solutions.
+            </p>
+          </section>
+
+          <!-- Skills Section -->
+          <section id="skills" class="scroll-mt-32">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-6 flex items-center gap-2 animate-on-scroll">
+              <span class="w-8 h-[1px] bg-accent"></span> Technical Skills
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <div class="p-5 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll delay-100">
+                <h4 class="text-white font-semibold mb-3 text-[15px] drop-shadow-sm">Languages</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Python</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">JavaScript</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">HTML5</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">CSS3</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">SQL</span>
+                </div>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll delay-200">
+                <h4 class="text-white font-semibold mb-3 text-[15px] drop-shadow-sm">Frontend & Databases</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">React.js</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Tailwind CSS</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Responsive Design</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Firebase</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Supabase</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Google Cloud Platform (GCP)</span>
+                </div>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll delay-100">
+                <h4 class="text-white font-semibold mb-3 text-[15px] drop-shadow-sm">Developer Tools</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Git</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">GitHub</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">VS Code</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Chrome DevTools</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Linux</span>
+                </div>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll delay-200">
+                <h4 class="text-white font-semibold mb-3 text-[15px] drop-shadow-sm">AI Productivity</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Generative AI Tools</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">AntiGravity</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">GitHub Copilot</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">n8n</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">OpenRouter</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Google AI Studio</span>
+                  <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-neutral-300">Claude Code</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Projects Section -->
+          <section id="projects" class="scroll-mt-32">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-6 flex items-center gap-2 animate-on-scroll">
+              <span class="w-8 h-[1px] bg-accent"></span> Projects
+            </h3>
+            <div class="flex flex-col gap-6">
+              
+              <div class="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll">
+                <div class="w-full">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="text-lg font-bold text-white drop-shadow-sm group-hover:text-accent transition-colors">CablePro</h4>
+                    <span class="text-xs font-mono text-neutral-500 bg-black/30 px-2 py-1 rounded-md">2026</span>
+                  </div>
+                  <p class="text-[14px] text-neutral-300 mb-3">Engineered a full-stack operator management platform featuring billing, payment tracking, and a real-time analytics dashboard.</p>
+                  <p class="text-[14px] text-neutral-400 mb-5 border-l-2 border-white/10 pl-3">Crafted a mobile-friendly user interface with dark mode, smooth animations, and financial reports, enhancing operator workflow efficiency by 25%.</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">React.js</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Next.js 14</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Tailwind CSS</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Firebase Firestore</span>
+                  </div>
+                  <div class="flex gap-4">
+                    <a href="https://github.com/N-gokulnath/cablepro" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-brands fa-github text-[16px]"></i> Code
+                    </a>
+                    <a href="https://cable-pro.github.io/app/" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[14px]"></i> Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll">
+                <div class="w-full">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="text-lg font-bold text-white drop-shadow-sm group-hover:text-accent transition-colors">RankFlow</h4>
+                    <span class="text-xs font-mono text-neutral-500 bg-black/30 px-2 py-1 rounded-md">2026</span>
+                  </div>
+                  <p class="text-[14px] text-neutral-300 mb-3">Architected a high-fidelity AI talent acquisition engine that automates resume screening by evaluating applicant profiles against target job descriptions.</p>
+                  <p class="text-[14px] text-neutral-400 mb-5 border-l-2 border-white/10 pl-3">Integrated Google Gemini 3.5 AI model using structured JSON to generate quantitative match scores. Implemented database persistence using Prisma ORM with SQLite and PostgreSQL.</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">React</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Gemini 3.5 API</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Tailwind</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Prisma ORM</span>
+                  </div>
+                  <div class="flex gap-4">
+                    <a href="https://github.com/N-gokulnath/rusume-ai-screener" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-brands fa-github text-[16px]"></i> Code
+                    </a>
+                    <a href="https://rankflow-screener.onrender.com/" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[14px]"></i> Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll">
+                <div class="w-full">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="text-lg font-bold text-white drop-shadow-sm group-hover:text-accent transition-colors">LinkedIn Post Automation</h4>
+                    <span class="text-xs font-mono text-neutral-500 bg-black/30 px-2 py-1 rounded-md">2025</span>
+                  </div>
+                  <p class="text-[14px] text-neutral-300 mb-3">Designed an n8n workflow to generate topic ideas, create custom images, and auto-publish content to LinkedIn.</p>
+                  <p class="text-[14px] text-neutral-400 mb-5 border-l-2 border-white/10 pl-3">Streamlined social media operations with an automated pipeline, reducing manual content creation overhead by 90%.</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">n8n</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">AI APIs</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Workflow Automation</span>
+                  </div>
+                  <div class="flex gap-4">
+                    <a href="https://github.com/N-gokulnath/LInkedin-automation" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-brands fa-github text-[16px]"></i> Code
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-[#1a1a1a]/40 border border-white/5 transition-all hover:bg-[#1a1a1a]/60 animate-on-scroll">
+                <div class="w-full">
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="text-lg font-bold text-white drop-shadow-sm group-hover:text-accent transition-colors">HTMLforge</h4>
+                    <span class="text-xs font-mono text-neutral-500 bg-black/30 px-2 py-1 rounded-md">2026</span>
+                  </div>
+                  <p class="text-[14px] text-neutral-300 mb-3">Created a web-based utility platform to convert raw HTML code and URLs into high-quality PDF documents.</p>
+                  <p class="text-[14px] text-neutral-400 mb-5 border-l-2 border-white/10 pl-3">Optimized backend conversion processes to generate PDFs with sub-second response times.</p>
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">HTML</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">Node.js</span>
+                    <span class="px-2.5 py-1 bg-accent/10 text-accent border border-accent/20 rounded-md text-xs font-medium">SQL</span>
+                  </div>
+                  <div class="flex gap-4">
+                    <a href="https://github.com/N-gokulnath/HTMLforge" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-brands fa-github text-[16px]"></i> Code
+                    </a>
+                    <a href="https://htmlforge-web.onrender.com" target="_blank" rel="noreferrer" class="flex items-center gap-1.5 text-sm font-medium text-neutral-300 hover:text-white transition-colors">
+                      <i class="fa-solid fa-arrow-up-right-from-square text-[14px]"></i> Live Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Experience Section -->
+          <section id="experience" class="scroll-mt-32">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-6 flex items-center gap-2 animate-on-scroll">
+              <span class="w-8 h-[1px] bg-accent"></span> Experience & Education
+            </h3>
+            <div class="relative border-l border-white/10 ml-3 pl-8 py-2 flex flex-col gap-10">
+              <div class="relative animate-on-scroll">
+                <div class="absolute -left-[37px] top-1 h-3 w-3 rounded-full bg-accent ring-4 ring-black/50"></div>
+                <span class="text-xs font-mono text-accent bg-accent/10 px-2 py-1 rounded-md mb-2 inline-block">May 2025 – June 2025</span>
+                <h4 class="text-base font-bold text-white drop-shadow-sm">Web Development Intern (Virtual)</h4>
+                <p class="text-sm text-neutral-400 mb-2">ApexPlanet Software Pvt. Ltd.</p>
+                <p class="text-[14px] text-neutral-300">Developed and implemented responsive web interfaces using HTML5, CSS3, and JavaScript, translating design mockups into interactive code.</p>
+              </div>
+              <div class="relative animate-on-scroll delay-100">
+                <div class="absolute -left-[37px] top-1 h-3 w-3 rounded-full bg-neutral-600 ring-4 ring-black/50"></div>
+                <span class="text-xs font-mono text-neutral-400 bg-white/5 px-2 py-1 rounded-md mb-2 inline-block">July 2023 – April 2026</span>
+                <h4 class="text-base font-bold text-white drop-shadow-sm">Bachelor of Computer Applications (BCA)</h4>
+                <p class="text-sm text-neutral-400 flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                  Guru Nanak College, Chennai
+                </p>
+              </div>
+              <div class="relative animate-on-scroll delay-200">
+                <div class="absolute -left-[37px] top-1 h-3 w-3 rounded-full bg-neutral-600 ring-4 ring-black/50"></div>
+                <span class="text-xs font-mono text-neutral-400 bg-white/5 px-2 py-1 rounded-md mb-2 inline-block">March 2023</span>
+                <h4 class="text-base font-bold text-white drop-shadow-sm">Higher Secondary Certificate (HSC)</h4>
+                <p class="text-sm text-neutral-400 flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                  Saradha Matric. Hr. Sec. School, Gingee
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Certifications Section -->
+          <section id="certifications" class="scroll-mt-32">
+            <h3 class="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-6 flex items-center gap-2 animate-on-scroll">
+              <span class="w-8 h-[1px] bg-accent"></span> Certifications
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-[#1a1a1a]/40 border border-white/5 flex flex-col justify-between animate-on-scroll delay-100">
+                <div>
+                  <h4 class="text-[14px] font-semibold text-white leading-tight mb-1">Introduction to Cloud Computing</h4>
+                </div>
+                <span class="text-[11px] font-mono text-neutral-500 mt-3">Feb. 2025</span>
+              </div>
+              <div class="p-4 rounded-xl bg-[#1a1a1a]/40 border border-white/5 flex flex-col justify-between animate-on-scroll delay-200">
+                <div>
+                  <h4 class="text-[14px] font-semibold text-white leading-tight mb-1">Data Analyst Essentials</h4>
+                  <p class="text-xs text-neutral-400">Cisco</p>
+                </div>
+                <span class="text-[11px] font-mono text-neutral-500 mt-3">Dec. 2024</span>
+              </div>
+              <div class="p-4 rounded-xl bg-[#1a1a1a]/40 border border-white/5 flex flex-col justify-between animate-on-scroll delay-100">
+                <div>
+                  <h4 class="text-[14px] font-semibold text-white leading-tight mb-1">Fundamentals of Generative AI</h4>
+                  <p class="text-xs text-neutral-400">Microsoft</p>
+                </div>
+                <span class="text-[11px] font-mono text-neutral-500 mt-3">July 2024</span>
+              </div>
+              <div class="p-4 rounded-xl bg-[#1a1a1a]/40 border border-white/5 flex flex-col justify-between animate-on-scroll delay-200">
+                <div>
+                  <h4 class="text-[14px] font-semibold text-white leading-tight mb-1">Cybersecurity Essentials</h4>
+                  <p class="text-xs text-neutral-400">Cisco</p>
+                </div>
+                <span class="text-[11px] font-mono text-neutral-500 mt-3">Nov. 2023</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Contact Section -->
+          <section id="contact" class="scroll-mt-32 animate-on-scroll">
+            <div class="flex flex-col items-center text-center max-w-2xl mx-auto">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Get In Touch</h3>
+              <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 drop-shadow-sm">Let's build something together.</h2>
+              <p class="text-[15px] text-neutral-200 mb-8 leading-relaxed max-w-xl">
+                I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+              </p>
+              <a href="mailto:gokulnath272006@gmail.com" class="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-accent px-6 text-[15px] font-medium text-white shadow-lg transition-all hover:bg-accent/90 hover:-translate-y-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Say Hello
+              </a>
+              
+              <div class="flex items-center gap-5 pt-12 text-neutral-300">
+                <a href="https://github.com/N-gokulnath" target="_blank" rel="noreferrer" class="hover:text-white hover:-translate-y-1 transition-all p-2">
+                  <i class="fa-brands fa-github text-[22px] drop-shadow-md"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/gokulnath-n-01b837319/" target="_blank" rel="noreferrer" class="hover:text-white hover:-translate-y-1 transition-all p-2">
+                  <i class="fa-brands fa-linkedin text-[22px] drop-shadow-md"></i>
+                </a>
+                <a href="https://leetcode.com/u/Gokulnath-N/" target="_blank" rel="noreferrer" class="hover:text-white hover:-translate-y-1 transition-all p-2">
+                  <i class="fa-solid fa-code text-[20px] drop-shadow-md"></i>
+                </a>
+                <a href="https://www.hackerrank.com/profile/gokulnath272006" target="_blank" rel="noreferrer" class="hover:text-white hover:-translate-y-1 transition-all p-2">
+                  <i class="fa-brands fa-hackerrank text-[22px] drop-shadow-md"></i>
+                </a>
+              </div>
+              
+              <div class="pt-12 text-[12px] text-neutral-400">
+                <p>Languages: Tamil (Native), English (Advanced)</p>
+                <p class="mt-1">© <script>document.write(new Date().getFullYear())</script> Gokulnath N. </p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>
